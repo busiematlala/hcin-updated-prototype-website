@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reference Generator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<h1>IIE Harvard Anglia Reference Generator</h1>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="generator.html">Reference Generator</a>
+<a href="guide.html">Reference Guide</a>
+<a href="citationguide.html">In-Text Citation Guide</a>
+</nav>
+
+</header>
+
+<section class="generator-section">
+
+<h2>Generate Your Reference</h2>
+
+<p class="intro-text">
+Select the source type and enter the required information. The system will
+generate a reference according to the IIE Harvard Anglia referencing style.
+</p>
+
+<div class="generator-box">
+
+<form id="referenceForm">
+
+<label>Select Source Type</label>
+
+<select id="sourceType">
+
+<option value="book">Book</option>
+
+<option value="ebook">eBook</option>
+
+<option value="journal">Journal Article</option>
+
+<option value="website">Website</option>
+
+<option value="youtube">YouTube Video</option>
+
+<option value="newspaper">Newspaper Article</option>
+
+<option value="podcast">Podcast</option>
+
+<option value="blog">Blog Article</option>
+
+<option value="pdf">PDF Document</option>
+
+</select>
+
+<label>Author / Organisation</label>
+<input type="text" id="author" placeholder="Enter author or organisation">
+
+<label>Year</label>
+<input type="number" id="year" placeholder="Enter publication year">
+
+<label>Title</label>
+<input type="text" id="title" placeholder="Enter title">
+
+<label>Publisher / Website Name</label>
+<input type="text" id="publisher" placeholder="Enter publisher">
+
+<label>URL</label>
+<input type="url" id="url" placeholder="Enter URL">
+
+<label>Access Date</label>
+<input type="date" id="access">
+
+<button type="button" onclick="generateReference()">
+Generate Reference
+</button>
+
+</form>
+
+<div class="output" id="output">
+Your generated reference will appear here.
+</div>
+
+<button type="button" class="copy-btn" onclick="copyReference()">
+Copy Reference
+</button>
+
+</div>
+
+</section>
+
+<section class="tips-section">
+
+<h2>IIE Harvard Anglia Formatting Tips</h2>
+
+<ul>
+
+<li>Book and journal titles should appear in italics.</li>
+
+<li>Always include an access date for online sources.</li>
+
+<li>Do not include URLs in in-text citations.</li>
+
+<li>Use sentence case for article and webpage titles.</li>
+
+<li>Check punctuation carefully.</li>
+
+<li>Use "Available at:" before URLs.</li>
+
+<li>Ensure author names are presented correctly.</li>
+
+<li>Use the Reference Guide page for formatting examples.</li>
+
+<li>Use the In-Text Citation Guide page for citation examples.</li>
+
+</ul>
+
+</section>
+
+<section class="about-section">
+
+<h2>Why Use the Generator?</h2>
+
+<p>
+This generator was designed specifically to support students using
+the IIE Harvard Anglia referencing style.
+</p>
+
+<p>
+The generator helps reduce formatting mistakes by automatically
+creating reference list entries from information supplied by the user.
+</p>
+
+<p>
+Students can also copy generated references directly into assignments,
+improving efficiency and supporting collaborative academic work.
+</p>
+
+</section>
+
+<footer>
+
+<p>
+IIE Harvard Anglia Reference Assistant Prototype | POE Project
+</p>
+
+</footer>
+
+<script>
+
+function generateReference(){
+
+let type =
+document.getElementById("sourceType").value;
+
+let author =
+document.getElementById("author").value;
+
+let year =
+document.getElementById("year").value;
+
+let title =
+document.getElementById("title").value;
+
+let publisher =
+document.getElementById("publisher").value;
+
+let url =
+document.getElementById("url").value;
+
+let access =
+document.getElementById("access").value;
+
+let output =
+document.getElementById("output");
+
+if(author === "" || year === "" || title === ""){
+
+output.innerHTML =
+"Please complete all required fields.";
+
+return;
+
+}
+
+let reference = "";
+
+if(type === "book"){
+
+reference =
+`${author}, ${year}. <em>${title}</em>. ${publisher}.`;
+
+}
+
+else if(type === "ebook"){
+
+reference =
+`${author}, ${year}. <em>${title}</em>. [e-book] Available at: &lt;${url}&gt; [Accessed ${access}].`;
+
+}
+
+else if(type === "journal"){
+
+reference =
+`${author}, ${year}. '${title}', <em>${publisher}</em>.`;
+
+}
+
+else if(type === "website"){
+
+reference =
+`${author}, ${year}. <em>${title}</em>. [online] Available at: &lt;${url}&gt; [Accessed ${access}].`;
+
+}
+
+else if(type === "youtube"){
+
+reference =
+`${author}, ${year}. <em>${title}</em>. [video online] Available at: &lt;${url}&gt; [Accessed ${access}].`;
+
+}
+
+else if(type === "newspaper"){
+
+reference =
+`${author}, ${year}. '${title}'. ${publisher}.`;
+
+}
+
+else if(type === "podcast"){
+
+reference =
+`${author}, ${year}. <em>${title}</em>. [podcast] Available at: &lt;${url}&gt; [Accessed ${access}].`;
+
+}
+
+else if(type === "blog"){
+
+reference =
+`${author}, ${year}. '${title}'. [blog] Available at: &lt;${url}&gt; [Accessed ${access}].`;
+
+}
+
+else if(type === "pdf"){
+
+reference =
+`${author}, ${year}. <em>${title}</em>. [pdf] Available at: &lt;${url}&gt; [Accessed ${access}].`;
+
+}
+
+output.innerHTML = reference;
+
+}
+
+function copyReference(){
+
+let reference =
+document.getElementById("output").innerText;
+
+navigator.clipboard.writeText(reference);
+
+alert("Reference copied successfully.");
+
+}
+
+</script>
+
+</body>
+</html>
